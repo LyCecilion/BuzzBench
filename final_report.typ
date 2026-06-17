@@ -5,7 +5,7 @@
   authors: (
     ([LyCecilion], [Project Hazelita]),
   ),
-  version: [0.1.0]
+  version: [0.1.0],
 )
 
 #show table.cell.where(y: 0): strong
@@ -28,7 +28,7 @@
   #v(.3em)
   该报告包含了一个智力竞赛抢答器的逻辑电路设计。
 
-  我们使用 Logisim 的一个现代分支 #link("https://github.com/Logisim-Ita/Logisim")[Logisim-ITA (Logisim Italian Fork)] 作为设计工具。相关的 `.circ` 设计文件和该设计报告的完整版将于 #link("https://github.com/LyCecilion/DigitalCircuitAndLogicalDesignFinalProject")[GitHub: LyCecilion/DigitalCircuitAndLogicalDesignFinalProject] 给出。
+  这里使用 Logisim 的一个现代分支 #link("https://github.com/Logisim-Ita/Logisim")[Logisim-ITA (Logisim Italian Fork)] 作为设计工具。相关的 `.circ` 设计文件和该设计报告的完整版将于 #link("https://github.com/LyCecilion/DigitalCircuitAndLogicalDesignFinalProject")[GitHub: LyCecilion/DigitalCircuitAndLogicalDesignFinalProject] 给出。
 ]
 
 #v(-.6em)
@@ -113,7 +113,7 @@ $
   "LOCK" = Q_0 + Q_1 + Q_2 + Q_3
 $
 
-由于 $"START"$ 是主持人的瞬时按钮，不能直接作为整个抢答阶段的保持信号，因此额外设置抢答允许状态 $"ALLOW"$，表示“主持人已经宣布开始抢答，但还没有队伍抢中”。该状态由 RS 锁存器实现：主持人按下 $"START"$ 后置位 $"ALLOW"$，按下 $"RESET"$ 或已有队伍抢中后复位 $"ALLOW"$。允许抢答信号为
+由于 $"START"$ 是主持人的瞬时按钮，不能直接作为整个抢答阶段的保持信号，因此额外设置抢答允许状态 $"ALLOW"$，表示「主持人已经宣布开始抢答，但还没有队伍抢中」。该状态由 RS 锁存器实现：主持人按下 $"START"$ 后置位 $"ALLOW"$，按下 $"RESET"$ 或已有队伍抢中后复位 $"ALLOW"$。允许抢答信号为
 
 $
   "ENABLE" = "ALLOW" dot overline("LOCK")
@@ -126,10 +126,10 @@ $
 为了处理多组完全同时按下按钮的极端情况，设置抢答优先级，即序号小的组优先于序号大的组。各组 RS 锁存器的置位信号为
 
 $
-  S_0 &= "ENABLE" dot K_0 \
-  S_1 &= "ENABLE" dot K_1 dot overline(K_0) \
-  S_2 &= "ENABLE" dot K_2 dot overline(K_0) dot overline(K_1) \
-  S_3 &= "ENABLE" dot K_3 dot overline(K_0) dot overline(K_1) dot overline(K_2)
+  S_0 & = "ENABLE" dot K_0 \
+  S_1 & = "ENABLE" dot K_1 dot overline(K_0) \
+  S_2 & = "ENABLE" dot K_2 dot overline(K_0) dot overline(K_1) \
+  S_3 & = "ENABLE" dot K_3 dot overline(K_0) dot overline(K_1) dot overline(K_2)
 $
 
 复位信号由主持人统一控制：
@@ -155,7 +155,7 @@ $
   "LED"_i = Q_i quad (i = 0, 1, 2, 3)
 $
 
-抢答等待指示灯用于表示“抢答已经开始，但还没有队伍抢中”。其逻辑为
+抢答等待指示灯用于表示「抢答已经开始，但还没有队伍抢中」。其逻辑为
 
 $
   "READY_LED" = "ENABLE" dot "FLASH_CLK"
@@ -189,8 +189,8 @@ $
 定时运行状态 $"RUN"$ 由 RS 锁存器保存。主持人按下 $"TIMER_START"$ 后，计数器清零并置位 $"RUN"$；当 $"RESET"$ 或 $"TIME_UP"$ 有效时，$"RUN"$ 复位，计数停止：
 
 $
-  S_("RUN") &= "TIMER_START" \
-  R_("RUN") &= "RESET" + "TIME_UP"
+  S_("RUN") & = "TIMER_START" \
+  R_("RUN") & = "RESET" + "TIME_UP"
 $
 
 计数脉冲由 $"RUN"$ 与秒脉冲相与得到：
@@ -205,8 +205,8 @@ $
 
 $
   "TIME_UP" =
-    ("COUNT_TENS" = "TARGET_TENS") dot
-    ("COUNT_ONES" = "TARGET_ONES")
+  ("COUNT_TENS" = "TARGET_TENS") dot
+  ("COUNT_ONES" = "TARGET_ONES")
 $
 
 当 $"TIME_UP" = 1$ 时，$"RUN"$ 被复位，计数停止。为了使时间到提示保持可见，模块内部还设置 $"TIME_ALARM"$ 锁存状态：$"TIME_UP"$ 置位 $"TIME_ALARM"$，$"RESET"$ 或下一次 $"TIMER_START"$ 复位 $"TIME_ALARM"$。蜂鸣器本体放在定时模块内部，其使能由 $"TIME_ALARM" dot "BEEP_CLK"$ 控制。定时模块电路如 @fig-timer 所示。
@@ -227,8 +227,8 @@ $
 同时，计分模块加入上下限保护。当分数已经为 $999$ 时，继续加分无效；当分数已经为 $000$ 时，继续减分无效：
 
 $
-  "ADD_ENABLE" &= "ADD" dot overline("IS_999") \
-  "SUB_ENABLE" &= "SUB" dot overline("IS_000")
+  "ADD_ENABLE" & = "ADD" dot overline("IS_999") \
+  "SUB_ENABLE" & = "SUB" dot overline("IS_000")
 $
 
 这样可以保证分数始终保持在 $000$ 到 $999$ 的有效范围内。单组计分模块电路如 @fig-score-counter 所示。
@@ -268,7 +268,7 @@ $
 
 #v(.5em)
 
-器件数量根据 Logisim 主电路统计窗口整理。表中基础元件采用“递归”统计值，即从主电路出发，将各子电路内部使用的元件一并计入。
+器件数量根据 Logisim 主电路统计窗口整理。表中基础元件采用「递归」统计值，即从主电路出发，将各子电路内部使用的元件一并计入。
 
 #table(
   columns: (1.4fr, .7fr, 2.3fr),
