@@ -4,9 +4,9 @@
 
 #import "@preview/pergamon:0.7.1": *
 
-#let sans = "Source Han Sans SC"
+#let sans = "Noto Sans CJK SC"
 #let sans-weight = 700
-#let serif = ("Libertinus Serif", "Source Han Serif SC")
+#let serif = ("Libertinus Serif", "Noto Serif CJK SC")
 
 #let text-size = 10pt
 

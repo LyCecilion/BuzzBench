@@ -2,7 +2,9 @@
 
 <div align="center">
 
-# 智力竞赛抢答器逻辑电路设计
+![BuzzBench Banner](./assets/banner.png)
+
+# 智力竞赛抢答器
 
 **「数字电路与逻辑设计」课程大作业**<br/>
 基于 [Logisim-ITA](https://github.com/Logisim-Ita/Logisim) 实现的 4 组智力竞赛抢答器逻辑控制电路。
@@ -11,9 +13,11 @@
 
 </div>
 
-## 📖 项目简介
+## 📖 简介
 
-本项目实现了一个完整的智力竞赛抢答器逻辑控制电路，满足课程设计的全部功能要求：
+本项目实现了一个完整的智力竞赛抢答器逻辑控制电路。
+
+## ✨ 特性
 
 - **抢答判别**：4 组独立抢答，RS 锁存器互锁保证只识别最先抢答的队伍
 - **声光提示**：抢答等待指示灯闪烁、抢中组指示灯常亮、蜂鸣器断续发声
@@ -47,21 +51,22 @@
             └── 小组选择 + 4 路分发
 ```
 
-## 📁 文件说明
+## 📁 项目结构
 
 ```text
 .
-├── experiment.circ          # Logisim 电路设计文件（主文件）
-├── final_report.pdf         # 设计报告 PDF
-├── final_report.typ         # 设计报告源码（Typst）
-├── typst_template/          # Typst 模板
-├── figures/                 # 电路截图
-│   ├── main.png             #   整机主电路
-│   ├── responder_latch.png  #   抢答判别模块
-│   ├── responder_indicator.png  # 抢答指示灯和声音模块
-│   ├── timer.png            #   定时模块
-│   ├── score_counter.png    #   单组计分模块
-│   └── score_board.png      #   总计分模块
+├── experiment.circ              # Logisim 电路设计文件（主文件）
+├── final_report.pdf             # 设计报告 PDF
+├── final_report.typ             # 设计报告源码（Typst）
+├── typst_template/              # Typst 模板
+├── assets/                      # 电路截图与素材
+│   ├── banner.png               #   README 头图
+│   ├── main.png                 #   整机主电路
+│   ├── responder_latch.png      #   抢答判别模块
+│   ├── responder_indicator.png  #   抢答指示灯和声音模块
+│   ├── timer.png                #   定时模块
+│   ├── score_counter.png        #   单组计分模块
+│   └── score_board.png          #   总计分模块
 └── README.md
 ```
 
@@ -118,6 +123,6 @@
 - **使能-时钟先后**：计分模块用缓冲器延迟时钟，确保使能信号先于计数脉冲稳定
 - **上下限保护**：计分 999 不再加分、000 不再减分，防止回绕
 
-## 📄 许可
+## 📄 许可证
 
-MIT License © 2026 LyCecilion (Project Hazelita)
+[MIT License](./LICENSE) © 2026 LyCecilion (Project Hazelita)

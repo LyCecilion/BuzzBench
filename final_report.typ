@@ -28,7 +28,7 @@
   #v(.3em)
   该报告包含了一个智力竞赛抢答器的逻辑电路设计。
 
-  这里使用 Logisim 的一个现代分支 #link("https://github.com/Logisim-Ita/Logisim")[Logisim-ITA (Logisim Italian Fork)] 作为设计工具。相关的 `.circ` 设计文件和该设计报告的完整版将于 #link("https://github.com/LyCecilion/DigitalCircuitAndLogicalDesignFinalProject")[GitHub: LyCecilion/DigitalCircuitAndLogicalDesignFinalProject] 给出。
+  这里使用 Logisim 的一个现代分支 #link("https://github.com/Logisim-Ita/Logisim")[Logisim-ITA (Logisim Italian Fork)] 作为设计工具。相关的 `.circ` 设计文件和该设计报告的完整版将于 #link("https://github.com/LyCecilion/BuzzBench")[GitHub: LyCecilion/BuzzBench] 给出。
 ]
 
 #v(-.6em)
@@ -141,7 +141,7 @@ $
 因此，当主持人按下 $"START"$ 后，系统进入等待抢答状态；第一组有效抢答信号会置位对应 RS 锁存器，并通过 $"LOCK"$ 关闭其他组输入。主持人按下 $"RESET"$ 后，所有锁存器清零，系统回到初始状态。抢答判别模块电路如 @fig-responder-latch 所示。
 
 #figure(
-  image("figures/responder_latch.png", width: 70%),
+  image("assets/responder_latch.png", width: 70%),
   caption: [抢答判别模块电路],
 ) <fig-responder-latch>
 
@@ -172,7 +172,7 @@ $
 该输出在主电路中接入蜂鸣器使能端，使抢答成功后蜂鸣器以断续方式发声。抢答指示灯和声音模块电路如 @fig-responder-indicator 所示。
 
 #figure(
-  image("figures/responder_indicator.png", width: 70%),
+  image("assets/responder_indicator.png", width: 70%),
   caption: [抢答指示灯和声音模块电路],
 ) <fig-responder-indicator>
 
@@ -212,7 +212,7 @@ $
 当 $"TIME_UP" = 1$ 时，$"RUN"$ 被复位，计数停止。为了使时间到提示保持可见，模块内部还设置 $"TIME_ALARM"$ 锁存状态：$"TIME_UP"$ 置位 $"TIME_ALARM"$，$"RESET"$ 或下一次 $"TIMER_START"$ 复位 $"TIME_ALARM"$。蜂鸣器本体放在定时模块内部，其使能由 $"TIME_ALARM" dot "BEEP_CLK"$ 控制。定时模块电路如 @fig-timer 所示。
 
 #figure(
-  image("figures/timer.png", width: 70%),
+  image("assets/timer.png", width: 70%),
   caption: [定时模块电路],
 ) <fig-timer>
 
@@ -234,7 +234,7 @@ $
 这样可以保证分数始终保持在 $000$ 到 $999$ 的有效范围内。单组计分模块电路如 @fig-score-counter 所示。
 
 #figure(
-  image("figures/score_counter.png", width: 70%),
+  image("assets/score_counter.png", width: 70%),
   caption: [单组计分模块电路],
 ) <fig-score-counter>
 
@@ -247,7 +247,7 @@ $
 总计分模块内部包含 4 个 `ScoreCounter`。$"TEAM_SEL"$ 经译码后生成 4 路组选择信号，使 $"ADD_SCORE"$ 和 $"SUB_SCORE"$ 只作用于当前选中的一组。模块输出采用简短命名，例如 $"1H"$、$"1T"$、$"1O"$ 分别表示第 1 组分数的百位、十位和个位；第 2\~4 组同理。总计分模块电路如 @fig-score-board 所示。
 
 #figure(
-  image("figures/score_board.png", width: 70%),
+  image("assets/score_board.png", width: 70%),
   caption: [总计分模块电路],
 ) <fig-score-board>
 
@@ -260,7 +260,7 @@ $
 在命名上，内部逻辑采用 $K_0 \~ K_3$、$Q_0 \~ Q_3$ 表示四组信号；对外显示和报告叙述采用第 1\~4 组。例如 $Q_0$ 对应第 1 组抢中，$Q_3$ 对应第 4 组抢中。整机主电路如 @fig-main-circuit 所示。
 
 #figure(
-  image("figures/main.png", width: 100%),
+  image("assets/main.png", width: 100%),
   caption: [整机主电路],
 ) <fig-main-circuit>
 
